@@ -1,54 +1,60 @@
 global xmx, jar
 import wx
-xmx = '0' #test
-jar = '1' #test
+xms = 'Unassigned'
+xmx = 'Unassigned'
+jar = 'Unassigned'
 
 class CheckFrame(wx.Frame):
     def __init__(self, parent, id, title):
         wx.Frame.__init__(self, parent, id, title, size=(800,600))
-        sizer = wx.BoxSizer(wx.HORIZONTAL)
-        sizer = wx.StaticBoxSizer(wx.HORIZONTAL, self, 'Minimal RAM allocation (xms)') #orient, window, label
-        self.button = wx.Button(self, id=1, label = '1024MB') #parent, id(ID_ANY), label, pos, size, style, validator, name
+        # sizer = wx.BoxSizer(wx.HORIZONTAL)
+        # sizer = wx.StaticBoxSizer(wx.HORIZONTAL, self, 'Minimal RAM allocation (xms)') #orient, window, label
+        self.xms = wx.StaticText(self, label = 'Minimal RAM allocation (xms)')
+        self.xms.SetPosition((5,10))
+        self.button = wx.Button(self, id=1, label = '1024MB', pos =(0,30)) #parent, id(ID_ANY), label, pos, size, style, validator, name
         self.Bind(wx.EVT_BUTTON, self.ButtonClick, id=1) #event, handler, source, id
-        sizer.Add(self.button, 0, wx.ALL, 5)
-        self.button2 = wx.Button(self, id=2, label = '2048MB')
+        # sizer.Add(self.button, 0, wx.ALL, 5)
+        self.button2 = wx.Button(self, id=2, label = '2048MB', pos =(80,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick2, id=2)
-        sizer.Add(self.button2, 0, wx.ALL, 5)
-        self.button3 = wx.Button(self, id=3, label = '3072MB')
+        # sizer.Add(self.button2, 0, wx.ALL, 5)
+        self.button3 = wx.Button(self, id=3, label = '3072MB', pos =(160,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick3, id=3)
-        sizer.Add(self.button3, 0, wx.ALL, 5)
-        self.button4 = wx.Button(self, id=4, label = '4096MB')
+        # sizer.Add(self.button3, 0, wx.ALL, 5)
+        self.button4 = wx.Button(self, id=4, label = '4096MB', pos =(240,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick4, id=4)
-        sizer.Add(self.button4, 0, wx.ALL, 5)
-        self.button5 = wx.Button(self, id=5, label = '5120MB')
+        # sizer.Add(self.button4, 0, wx.ALL, 5)
+        self.button5 = wx.Button(self, id=5, label = '5120MB', pos =(320,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick5, id=5)
-        sizer.Add(self.button5, 0, wx.ALL, 5)
-        self.button6 = wx.Button(self, id=6, label = '6144MB')
+        # sizer.Add(self.button5, 0, wx.ALL, 5)
+        self.button6 = wx.Button(self, id=6, label = '6144MB', pos =(400,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick6, id=6)
-        sizer.Add(self.button6, 0, wx.ALL, 5)
-        self.button7 = wx.Button(self, id=7, label = '7168MB')
+        # sizer.Add(self.button6, 0, wx.ALL, 5)
+        self.button7 = wx.Button(self, id=7, label = '7168MB', pos =(480,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick7, id=7)
-        sizer.Add(self.button7, 0, wx.ALL, 5)
-        self.button8 = wx.Button(self, id=8, label = '8192MB')
+        # sizer.Add(self.button7, 0, wx.ALL, 5)
+        self.button8 = wx.Button(self, id=8, label = '8192MB', pos =(560,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick8, id=8)
-        sizer.Add(self.button8, 0, wx.ALL, 5)
-        self.button9 = wx.Button(self, id=9, label = 'DETAIL')
+        # sizer.Add(self.button8, 0, wx.ALL, 5)
+        self.button9 = wx.Button(self, id=9, label = 'DETAIL', pos =(640,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick9, id=9)
-        sizer.Add(self.button9, 0, wx.ALL, 5)
-        self.button_end = wx.Button(self, id=44, label = '44') #NEED TO MOVE
+        # sizer.Add(self.button9, 0, wx.ALL, 5)
+
+        self.button_end = wx.Button(self, id=44, label = 'Done', pos = (640,300)) #NEED TO MOVE
         self.Bind(wx.EVT_BUTTON, self.ButtonEnd, id=44)
-        sizer.Add(self.button_end, 0, wx.ALL, 5)
-        self.SetSizer(sizer)
+        # sizer.Add(self.button_end, 0, wx.ALL, 5)
+
+        # self.SetSizer(sizer)
 
 
-        
+
+
 
     def ButtonClick(self, event): #1024MB
         global xms
         print('Button 1 clicked')
         xms = '-Xms1024M'
         print(xms)
-    
+
     def ButtonClick2(self, event): #2048MB
         global xms
         print('Button 2 clicked')
