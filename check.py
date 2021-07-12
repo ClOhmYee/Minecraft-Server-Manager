@@ -1,5 +1,7 @@
-global xmx, jar
+global xms, xmx, jar
 import wx
+import detail
+
 xms = 'Unassigned'
 xmx = 'Unassigned'
 jar = 'Unassigned'
@@ -98,19 +100,19 @@ class CheckFrame(wx.Frame):
         print(xms)
 
     def ButtonClick9(self, event): #8192MB
-        global xms
+        frame = detail.DetailXmsInfo(self, -1, 'Setting specific minimum RAM allocation')
+        frame.Show()
         print('Button 9 clicked')
-        xms = 'Detail adjustment here'
-        print(xms)
 
     def ButtonEnd(self, event): #Double check exit
-        dialog = wx.MessageDialog(self, 'Minimal RAM = {}\nMaximum RAM = {}\nYour server bukkit = {}\nAre you sure you want to save this to the program?'.format(xms,xmx,jar), 'Double check', wx.YES_NO)
+        dialog = wx.MessageDialog(self, 'Minimal RAM = {}\nMaximum RAM = {}\nYour server bukkit = {}\nAre you sure you want to save this to the program?'.format(xms,xmx,jar), 'Warning', wx.YES_NO)
         if dialog.ShowModal() == wx.ID_YES:
             print('Save approved')
-            quit(0)
+            self.Close() #close the RAM allocation page
         else:
             print('Save denied')
         dialog.Destroy()
+
 
 
 # only for test, should clear the code below when finished / main page would not work because of this.
