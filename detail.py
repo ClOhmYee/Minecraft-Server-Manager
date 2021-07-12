@@ -1,4 +1,5 @@
 import wx
+import check
 
 class DetailXmsInfo(wx.Frame):
     def __init__(self, parent, id, title):
@@ -23,6 +24,7 @@ class DetailXmsInfo(wx.Frame):
         print(xms)
         dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server minimum RAM : {}MB?'.format(xms_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
+            check.xms = xms
             self.Close() # close the detail page
         else:
             pass

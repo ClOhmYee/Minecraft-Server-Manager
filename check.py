@@ -100,6 +100,7 @@ class CheckFrame(wx.Frame):
         print(xms)
 
     def ButtonClick9(self, event): #8192MB
+        global xms
         frame = detail.DetailXmsInfo(self, -1, 'Setting specific minimum RAM allocation')
         frame.Show()
         print('Button 9 clicked')
