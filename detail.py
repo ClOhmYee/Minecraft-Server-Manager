@@ -21,19 +21,20 @@ class DetailXmsInfo(wx.Frame):
         xms_value = self.g_xms.GetValue()
         xms = '-Xms'+str(xms_value)+'M'
         print(xms)
-        dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server minimum RAM {}MB?'.format(xms_value), 'Warning', wx.CANCEL)
+        dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server minimum RAM : {}MB?'.format(xms_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-            pass # close the detail page
+            self.Close() # close the detail page
         else:
             pass
-        dialog.Destroy()
+        print(xms)
+
         
 
 
-def run():
-    app = wx.App()
-    frame = DetailXmsInfo(None, -1, 'RAM allocation test') # id = -1 to put initial value
-    frame.Show()
-    app.MainLoop()
+# def run():
+#     app = wx.App()
+#     frame = DetailXmsInfo(None, -1, 'RAM allocation test') # id = -1 to put initial value
+#     frame.Show()
+#     app.MainLoop()
 
-run()
+# run()
