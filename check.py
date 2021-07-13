@@ -8,7 +8,7 @@ jar = 'Unassigned'
 
 class CheckFrame(wx.Frame):
     def __init__(self, parent, id, title):
-        # -----------------------------------xms-----------------------------------
+# -----------------------------------xms-----------------------------------
         wx.Frame.__init__(self, parent, id, title, size=(800,600))
         self.xms = wx.StaticText(self, label = 'Minimum RAM allocation (xms) (1024MB = 1GB)')
         self.xms.SetPosition((5,10))
@@ -248,10 +248,10 @@ class DetailXmxInfo(wx.Frame):
 
 
 # only for test, should clear the code below when finished / main page would not work because of this.
-def run():
-    app = wx.App()
-    frame = CheckFrame(None, -1, 'RAM allocation test') # id = -1 to put initial value
-    frame.Show()
-    app.MainLoop()
+# def run():
+#     app = wx.App()
+#     frame = CheckFrame(None, -1, 'RAM allocation test') # id = -1 to put initial value
+#     frame.Show()
+#     app.MainLoop()
 
-run()
+# run()
