@@ -3,10 +3,24 @@ import os
 import detail # use detail.py
 
 
-
-# xms = 'Unassigned'
-# xmx = 'Unassigned'
-# jar = 'Unassigned'
+try: # import xms data
+    file_xms = open(detail.data_path+'\data_xms.txt','r')
+    xms = file_xms.read()
+    file_xms.close()
+except:
+    pass
+try: # import xmx data
+    file_xmx = open(detail.data_path+'\data_xmx.txt','r')
+    xmx = file_xmx.read()
+    file_xmx.close()
+except:
+    pass
+try: #import jar data
+    file_jar = open(detail.data_path+'\data_jar.txt','r')
+    jar = file_jar.read()
+    file_jar.close()
+except:
+    pass
 
 
 
