@@ -1,26 +1,27 @@
 import wx
 import os
 import detail # use detail.py
-
+import DataTool # use DataTool.py
 
 try: # import xms data
-    file_xms = open(detail.data_path+'\data_xms.txt','r')
+    file_xms = open(DataTool.data_path+'\data_xms.txt','r')
     xms = file_xms.read()
     file_xms.close()
 except:
     pass
 try: # import xmx data
-    file_xmx = open(detail.data_path+'\data_xmx.txt','r')
+    file_xmx = open(DataTool.data_path+'\data_xmx.txt','r')
     xmx = file_xmx.read()
     file_xmx.close()
 except:
     pass
 try: #import jar data
-    file_jar = open(detail.data_path+'\data_jar.txt','r')
+    file_jar = open(DataTool.data_path+'\data_jar.txt','r')
     jar = file_jar.read()
     file_jar.close()
 except:
     pass
+
 
 
 
@@ -95,7 +96,7 @@ class CheckFrame(wx.Frame):
             dialog = wx.MessageDialog(self, 'Are you sure your bukkit name is {}.jar? (DONT PUT .JAR WHEN TYPING!)'.format(self.g_jar.GetValue()), 'Warning', wx.YES_NO)
             if dialog.ShowModal() == wx.ID_YES:
                 jar = self.g_jar.GetValue()+'.jar'
-                file_jar = open(detail.data_path+'\data_jar.txt','w')
+                file_jar = open(DataTool.data_path+'\data_jar.txt','w')
                 file_jar.write(jar)
                 file_jar.close()
                 print(jar)
@@ -169,13 +170,13 @@ class CheckFrame(wx.Frame):
         else:
             if dialog.ShowModal() == wx.ID_YES:
                 print('Save approved')
-                file_xms = open(detail.data_path+'\data_xms.txt','w')
+                file_xms = open(DataTool.data_path+'\data_xms.txt','w')
                 file_xms.write(xms)
                 file_xms.close()
-                file_xmx = open(detail.data_path+'\data_xmx.txt','w')
+                file_xmx = open(DataTool.data_path+'\data_xmx.txt','w')
                 file_xmx.write(xmx)
                 file_xmx.close()
-                file_jar = open(detail.data_path+'\data_jar.txt','w') # not necessary save, just double save process.
+                file_jar = open(DataTool.data_path+'\data_jar.txt','w') # not necessary save, just double save process.
                 file_jar.write(jar)
                 file_jar.close()            
                 self.Close() #close the RAM allocation page

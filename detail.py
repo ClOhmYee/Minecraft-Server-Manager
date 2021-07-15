@@ -1,7 +1,6 @@
 import wx
 import os
-
-data_path = os.path.dirname(__file__)+'\data'
+import DataTool
 
 
 
@@ -30,7 +29,7 @@ class DetailXmsInfo(wx.Frame):
         print(xms)
         dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server minimum RAM : {}MB?'.format(xms_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-            xms_file = open(data_path+'\data_xms.txt', 'w')
+            xms_file = open(DataTool.data_path+'\data_xms.txt','w')
             xms_file.write(xms)
             xms_file.close()
             self.Close() # close the detail page
@@ -65,7 +64,7 @@ class DetailXmxInfo(wx.Frame):
         print(xmx)
         dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server maximum RAM : {}MB?'.format(xmx_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-            xmx_file = open(data_path+'\data_xmx.txt','w')
+            xmx_file = open(DataTool.data_path+'\data_xmx.txt','w')
             xmx_file.write(xmx)
             xmx_file.close()
             self.Close() # close the detail page

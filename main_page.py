@@ -1,11 +1,28 @@
 import os
 import wx
-from wx.core import JPEGHandler
 import check
+import DataTool
 
-xms = 'Unassigned'
-xmx = 'Unassigned'
-jar = 'Unassigned'
+global xms, xmx, jar
+try: # import xms data
+    file_xms = open(DataTool.data_path+'\data_xms.txt','r')
+    xms = file_xms.read()
+    file_xms.close()
+except:
+    xms = 'Unassigned'
+try: # import xmx data
+    file_xmx = open(DataTool.data_path+'\data_xmx.txt','r')
+    xmx = file_xmx.read()
+    file_xmx.close()
+except:
+    xmx = 'Unassigned'
+try: #import jar data
+    file_jar = open(DataTool.data_path+'\data_jar.txt','r')
+    jar = file_jar.read()
+    file_jar.close()
+except:
+    jar = 'Unassigned'
+
 
 
 class MainFrame(wx.Frame):
@@ -26,6 +43,7 @@ class MainFrame(wx.Frame):
 
         self.Centre()
         
+
     def Test1(self, event):
         self.show_status = wx.StaticText(self, label = 'xms = {}, xmx = {}, jar = {}'.format(xms,xmx,jar))
         self.show_status.SetPosition((450,470))
@@ -46,13 +64,13 @@ class MainFrame(wx.Frame):
 
 
 
-def run():
+def RunMain():
     app = wx.App()
     frame = MainFrame(None, -1, 'Minecraft Server Manager') # id = -1 to put initial value
     frame.Show()
     app.MainLoop()
 
-run()
+RunMain()
 
 
 
