@@ -1,5 +1,7 @@
 import wx
-from wx.core import Dialog
+import os
+
+data_path = os.path.dirname(__file__)+'\data'
 
 
 
@@ -28,15 +30,13 @@ class DetailXmsInfo(wx.Frame):
         print(xms)
         dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server minimum RAM : {}MB?'.format(xms_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-            SendXmsData()
+            xms_file = open(data_path+'\data_xms.txt', 'w')
+            xms_file.write(xms)
+            xms_file.close()
             self.Close() # close the detail page
         else:
             pass
-        Dialog.Destroy()
-
-def SendXmsData():
-    import check
-    check.xms = xms
+        dialog.Destroy()
 
 
 
@@ -54,33 +54,38 @@ class DetailXmxInfo(wx.Frame):
 
         self.button = wx.Button(self.panel, label = "Done")
         self.button.SetPosition((400,100))
-        self.button.Bind(wx.EVT_BUTTON, self.ButtonClick_2)
-        self.g_xmx.Bind(wx.EVT_TEXT_ENTER, self.ButtonClick_2)
+        self.button.Bind(wx.EVT_BUTTON, self.ButtonClick)
+        self.g_xmx.Bind(wx.EVT_TEXT_ENTER, self.ButtonClick)
 
     
-    def ButtonClick_2(self,event):
+    def ButtonClick(self,event):
         global xmx
         xmx_value = self.g_xmx.GetValue()
         xmx = '-Xmx'+str(xmx_value)+'M'
         print(xmx)
         dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server maximum RAM : {}MB?'.format(xmx_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-            SendXmxData()
+            xmx_file = open(data_path+'\data_xmx.txt','w')
+            xmx_file.write(xmx)
+            xmx_file.close()
             self.Close() # close the detail page
         else:
             pass
-        Dialog.Destroy()
+        dialog.Destroy()
     
-def SendXmxData():
-    import check
-    check.xmx = xmx
 
 
 
-# def run():
-#     app = wx.App()
-#     frame = DetailXmsInfo(None, -1, 'RAM allocation test') # id = -1 to put initial value
-#     frame.Show()
-#     app.MainLoop()
+def RunXms():
+    app = wx.App()
+    frame = DetailXmsInfo(None, -1, 'RAM allocation test (xms)') # xms test
+    frame.Show()
+    app.MainLoop()
 
-# run()
+def RunXmx():
+    app = wx.App()
+    frame = DetailXmxInfo(None, -1, 'RAM allocation test (xmx)') # xmx test
+    frame.Show()
+    app.MainLoop()
+
+# type RunXms() or RunXmx() below to test classes.
