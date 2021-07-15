@@ -1,7 +1,5 @@
-import os
-import wx
-import check
-import DataTool
+import wx, os
+import check, DataTool, start_server  # use detail.py, DataTool.py, start_server.py
 
 global xms, xmx, jar
 try: # import xms data
@@ -40,6 +38,8 @@ class MainFrame(wx.Frame):
         self.pnl = wx.Panel(self)
         self.test1 = wx.Button(self.pnl, id=1111, label = 'status', pos =(650,400), size =(100,70))
         self.Bind(wx.EVT_BUTTON, self.Test1, id=1111)
+        self.button1 = wx.Button(self.pnl, id=111, label = 'Run the server', pos =(650,350), size =(100,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonStart, id=111)
 
         self.Centre()
         
@@ -47,6 +47,9 @@ class MainFrame(wx.Frame):
     def Test1(self, event):
         self.show_status = wx.StaticText(self, label = 'xms = {}, xmx = {}, jar = {}'.format(xms,xmx,jar))
         self.show_status.SetPosition((450,470))
+
+    def ButtonStart(self, event):
+        start_server.RunServer()
 
 
     def RAM_allocation(self,event):
