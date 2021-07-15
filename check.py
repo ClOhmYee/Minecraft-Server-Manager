@@ -2,6 +2,8 @@ import wx
 import os
 import detail # use detail.py
 
+
+
 # xms = 'Unassigned'
 # xmx = 'Unassigned'
 # jar = 'Unassigned'
@@ -144,22 +146,28 @@ class CheckFrame(wx.Frame):
         print('Button 9 clicked')
 
     def ButtonEnd(self, event): #Double check exit
-        dialog = wx.MessageDialog(self, 'Minimal RAM = {}\nMaximum RAM = {}\nYour server bukkit = {}\nAre you sure you want to save this to the program?'.format(xms,xmx,jar), 'Warning', wx.YES_NO)
-        if dialog.ShowModal() == wx.ID_YES:
-            print('Save approved')
-            file_xms = open(detail.data_path+'\data_xms.txt','w')
-            file_xms.write(xms)
-            file_xms.close()
-            file_xmx = open(detail.data_path+'\data_xmx.txt','w')
-            file_xmx.write(xmx)
-            file_xmx.close()
-            file_jar = open(detail.data_path+'\data_jar.txt','w') # not necessary save, just double save process.
-            file_jar.write(jar)
-            file_jar.close()            
-            self.Close() #close the RAM allocation page
+        try:
+            dialog = wx.MessageDialog(self, 'Minimal RAM = {}\nMaximum RAM = {}\nYour server bukkit = {}\nAre you sure you want to save this to the program?'.format(xms,xmx,jar), 'Warning', wx.YES_NO)
+        except:
+            dialog = wx.MessageDialog(self, 'At least one value does not exist. Please click after entering all values.', 'Error', wx.OK)
+            dialog.ShowModal()
+            dialog.Destroy()
         else:
-            print('Save denied')
-        dialog.Destroy()
+            if dialog.ShowModal() == wx.ID_YES:
+                print('Save approved')
+                file_xms = open(detail.data_path+'\data_xms.txt','w')
+                file_xms.write(xms)
+                file_xms.close()
+                file_xmx = open(detail.data_path+'\data_xmx.txt','w')
+                file_xmx.write(xmx)
+                file_xmx.close()
+                file_jar = open(detail.data_path+'\data_jar.txt','w') # not necessary save, just double save process.
+                file_jar.write(jar)
+                file_jar.close()            
+                self.Close() #close the RAM allocation page
+            else:
+                print('Save denied')
+            dialog.Destroy()
 
 
 
@@ -221,10 +229,10 @@ class CheckFrame(wx.Frame):
 
 
 
-def run():
+def RunCheck():
     app = wx.App()
     frame = CheckFrame(None, -1, 'RAM allocation test') # id = -1 to put initial value
     frame.Show()
     app.MainLoop()
 
-run()
+RunCheck()
