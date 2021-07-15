@@ -112,29 +112,21 @@ class CheckFrame(wx.Frame):
 
         self.t_jar = wx.StaticText(self, label = 'Type your bukkit name (Extension : . jar) :')
         self.t_jar.SetPosition((5,140))
-        g_jar = wx.TextCtrl(self, style=wx.TE_PROCESS_ENTER)
-        g_jar.SetPosition((240,140))
+        self.g_jar = wx.TextCtrl(self, style=wx.TE_PROCESS_ENTER)
+        self.g_jar.SetPosition((240,140))
         self.button_jar = wx.Button(self, id=20, label = 'Save jar name')
         self.button_jar.SetPosition((360,140))
         self.button_jar.Bind(wx.EVT_BUTTON, self.JarClick)
-        g_jar.Bind(wx.EVT_TEXT_ENTER, self.JarClick)
+        self.g_jar.Bind(wx.EVT_TEXT_ENTER, self.JarClick)
 
     def JarClick(self, event):
-        if self.g_jar.GetValue() == '':
-            dialog = wx.MessageDialog(self, 'Please enter your bukkit name before saving.', 'Error', wx.OK)
-            dialog.ShowModal()
-            dialog.Destroy()
-        else:
-            write_data = self.g_jar.GetValue()
-            dialog = wx.MessageDialog(self, 'Are you sure your bukkit name is {}.jar? (DONT PUT .JAR WHEN TYPING!)'.format(write_data), 'Warning', wx.YES_NO)
-            if dialog.ShowModal() == wx.ID_YES:
-                print(write_data)
-                file_jar = open(data_path+'\jar.txt', 'w+')
-                file_jar.write(write_data)
-                file_jar.close()
-            else:
-                pass
-            dialog.Destroy()
+
+        write_data = self.g_jar.GetValue()
+        print(write_data)
+        file_jar = open(data_path+'\jar.txt', 'w')
+        file_jar.write(write_data)
+        file_jar.close()
+
 
     def SaveData(self, xms):
         file_xms = open(data_path+'\j_xms.txt','w')
