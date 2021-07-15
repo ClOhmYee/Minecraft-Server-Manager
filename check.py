@@ -249,4 +249,4 @@ def RunCheck():
     frame.Show()
     app.MainLoop()
 
-RunCheck()
+# RunCheck()
