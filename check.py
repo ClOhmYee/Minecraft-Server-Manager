@@ -1,8 +1,10 @@
 import wx
+import os
+import detail # use detail.py
 
-xms = 'Unassigned'
-xmx = 'Unassigned'
-jar = 'Unassigned'
+# xms = 'Unassigned'
+# xmx = 'Unassigned'
+# jar = 'Unassigned'
 
 
 
@@ -30,8 +32,7 @@ class CheckFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.ButtonClick8, id=8)
         self.button9 = wx.Button(self, id=9, label = 'DETAIL', pos =(640,30))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick9, id=9)
-
-        self.button_end = wx.Button(self, id=44, label = 'Done', pos = (640,300)) #NEED TO MOVE
+        self.button_end = wx.Button(self, id=44, label = 'Done', pos = (640,300))
         self.Bind(wx.EVT_BUTTON, self.ButtonEnd, id=44)
 
 
@@ -59,6 +60,32 @@ class CheckFrame(wx.Frame):
         self.button19 = wx.Button(self, id=19, label = 'DETAIL', pos =(640,90))
         self.Bind(wx.EVT_BUTTON, self.ButtonClick19, id=19)
 
+        self.jar = wx.StaticText(self, label = 'Type your bukkit name (Extension : . jar) :')
+        self.jar.SetPosition((5,140))
+        self.g_jar = wx.TextCtrl(self, style=wx.TE_PROCESS_ENTER)
+        self.g_jar.SetPosition((240,140))
+        self.button_jar = wx.Button(self, id=20, label = 'Save jar name')
+        self.button_jar.SetPosition((360,140))
+        self.button_jar.Bind(wx.EVT_BUTTON, self.JarClick)
+        self.g_jar.Bind(wx.EVT_TEXT_ENTER, self.JarClick)
+
+    def JarClick(self, event):
+        global jar
+        if self.g_jar.GetValue() == '':
+            dialog = wx.MessageDialog(self, 'Please enter your bukkit name before saving.', 'Error', wx.OK)
+            dialog.ShowModal()
+            dialog.Destroy()
+        else:
+            dialog = wx.MessageDialog(self, 'Are you sure your bukkit name is {}.jar? (DONT PUT .JAR WHEN TYPING!)'.format(self.g_jar.GetValue()), 'Warning', wx.YES_NO)
+            if dialog.ShowModal() == wx.ID_YES:
+                jar = self.g_jar.GetValue()+'.jar'
+                file_jar = open(detail.data_path+'\data_jar.txt','w')
+                file_jar.write(jar)
+                file_jar.close()
+                print(jar)
+            else:
+                pass
+            dialog.Destroy()
 
 
 
@@ -112,7 +139,7 @@ class CheckFrame(wx.Frame):
 
     def ButtonClick9(self, event): #8192MB
         global xms
-        frame = DetailXmsInfo(self, -1, 'Setting specific minimum RAM allocation')
+        frame = detail.DetailXmsInfo(self, -1, 'Setting specific minimum RAM allocation')
         frame.Show()
         print('Button 9 clicked')
 
@@ -120,6 +147,15 @@ class CheckFrame(wx.Frame):
         dialog = wx.MessageDialog(self, 'Minimal RAM = {}\nMaximum RAM = {}\nYour server bukkit = {}\nAre you sure you want to save this to the program?'.format(xms,xmx,jar), 'Warning', wx.YES_NO)
         if dialog.ShowModal() == wx.ID_YES:
             print('Save approved')
+            file_xms = open(detail.data_path+'\data_xms.txt','w')
+            file_xms.write(xms)
+            file_xms.close()
+            file_xmx = open(detail.data_path+'\data_xmx.txt','w')
+            file_xmx.write(xmx)
+            file_xmx.close()
+            file_jar = open(detail.data_path+'\data_jar.txt','w') # not necessary save, just double save process.
+            file_jar.write(jar)
+            file_jar.close()            
             self.Close() #close the RAM allocation page
         else:
             print('Save denied')
@@ -178,80 +214,17 @@ class CheckFrame(wx.Frame):
 
     def ButtonClick19(self, event): #8192MB
         global xmx
-        frame = DetailXmxInfo(self, -1, 'Setting specific maximum RAM allocation')
+        frame = detail.DetailXmxInfo(self, -1, 'Setting specific maximum RAM allocation')
         frame.Show()
         print('Button 19 clicked')
 
 
 
-# -----------------------------------xms-----------------------------------
-class DetailXmsInfo(wx.Frame):
-    def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title, size=(500,170))
 
-        self.panel = wx.Panel(self)
-        self.xms = wx.StaticText(self.panel, label = "Please enter the minimum RAM allocation you want (unit : MB) :")
-        self.xms.SetPosition((10,50))
-        self.g_xms = wx.TextCtrl(self.panel, style=wx.TE_PROCESS_ENTER)
-        self.g_xms.SetPosition((365,50))
+def run():
+    app = wx.App()
+    frame = CheckFrame(None, -1, 'RAM allocation test') # id = -1 to put initial value
+    frame.Show()
+    app.MainLoop()
 
-        self.button = wx.Button(self.panel, label = "Done")
-        self.button.SetPosition((400,100))
-        self.button.Bind(wx.EVT_BUTTON, self.ButtonClick)
-        self.g_xms.Bind(wx.EVT_TEXT_ENTER, self.ButtonClick)
-
-    
-    def ButtonClick(self,event):
-        global xms
-        xms_value = self.g_xms.GetValue()
-        dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server minimum RAM : {}MB?'.format(xms_value), 'Warning', wx.YES_NO)
-        if dialog.ShowModal() == wx.ID_YES:
-            xms = '-Xms'+str(xms_value)+'M'
-            print(xms)
-            self.Close() # close the detail page
-        else:
-            pass
-        dialog.Destroy()
-
-
-
-
-# -----------------------------------xmx-----------------------------------
-class DetailXmxInfo(wx.Frame):
-    def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title, size=(500,170))
-
-        self.panel = wx.Panel(self)
-        self.xmx = wx.StaticText(self.panel, label = "Please enter the maximum RAM allocation you want (unit : MB) :")
-        self.xmx.SetPosition((10,50))
-        self.g_xmx = wx.TextCtrl(self.panel, style=wx.TE_PROCESS_ENTER)
-        self.g_xmx.SetPosition((365,50))
-
-        self.button = wx.Button(self.panel, label = "Done")
-        self.button.SetPosition((400,100))
-        self.button.Bind(wx.EVT_BUTTON, self.ButtonClick)
-        self.g_xmx.Bind(wx.EVT_TEXT_ENTER, self.ButtonClick)
-
-    
-    def ButtonClick(self,event):
-        global xmx
-        xmx_value = self.g_xmx.GetValue()
-        print(xmx_value)
-        dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server maximum RAM : {}MB?'.format(xmx_value), 'Warning', wx.YES_NO)
-        if dialog.ShowModal() == wx.ID_YES:
-            xmx = '-Xmx'+str(xmx_value)+'M'
-            print(xmx)
-            self.Close() # close the detail page
-        else:
-            pass
-        dialog.Destroy()
-
-
-# only for test, should clear the code below when finished / main page would not work because of this.
-# def run():
-#     app = wx.App()
-#     frame = CheckFrame(None, -1, 'RAM allocation test') # id = -1 to put initial value
-#     frame.Show()
-#     app.MainLoop()
-
-# run()
+run()
