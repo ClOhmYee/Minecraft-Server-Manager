@@ -25,19 +25,5 @@ def RunServer():
         print(cmd)
         os.system(cmd)
 
-RunServer()
 
-
-# file_xms = open(DataTool.data_path+'\data_xms.txt','r')
-# xms = file_xms.read()
-# file_xms.close()
-# file_xmx = open(DataTool.data_path+'\data_xmx.txt','r')
-# xmx = file_xmx.read()
-# file_xmx.close()
-# file_jar = open(DataTool.data_path+'\data_jar.txt','r')
-# jar = file_jar.read()
-# file_jar.close()
-# cmd = 'java -Xms8192M -Xmx8192M -jar bukkit.jar nogui'
-# print('Starting the server . . .')
-# print(cmd)
-# os.system(cmd)
+# RunServer()

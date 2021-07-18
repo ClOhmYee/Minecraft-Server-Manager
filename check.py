@@ -1,7 +1,5 @@
-import wx
-import os
-import detail # use detail.py
-import DataTool # use DataTool.py
+import wx, os
+import detail, DataTool # use detail.py, DataTool.py
 
 try: # import xms data
     file_xms = open(DataTool.data_path+'\data_xms.txt','r')
@@ -28,7 +26,7 @@ except:
 class CheckFrame(wx.Frame):
     def __init__(self, parent, id, title):
 # -----------------------------------xms-----------------------------------
-        wx.Frame.__init__(self, parent, id, title, size=(800,600))
+        wx.Frame.__init__(self, parent, id, title, size=(740,375))
         self.xms = wx.StaticText(self, label = 'Minimum RAM allocation (xms) (1024MB = 1GB)')
         self.xms.SetPosition((5,10))
         self.button = wx.Button(self, id=1, label = '1024MB', pos =(0,30)) #parent, id(ID_ANY), label, pos, size, style, validator, name
@@ -110,80 +108,83 @@ class CheckFrame(wx.Frame):
         global xms
         print('Button 1 clicked')
         xms = '-Xms1024M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick2(self, event): #2048MB
         global xms
         print('Button 2 clicked')
         xms = '-Xms2048M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick3(self, event): #3072MB
         global xms
         print('Button 3 clicked')
         xms = '-Xms3072M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick4(self, event): #4096MB
         global xms
         print('Button 4 clicked')
         xms = '-Xms4096M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick5(self, event): #5120MB
         global xms
         print('Button 5 clicked')
         xms = '-Xms5120M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick6(self, event): #6144MB
         global xms
         print('Button 6 clicked')
         xms = '-Xms6144M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick7(self, event): #7168MB
         global xms
         print('Button 7 clicked')
         xms = '-Xms7168M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick8(self, event): #8192MB
         global xms
         print('Button 8 clicked')
         xms = '-Xms8192M'
+        DataTool.SaveXms(xms)
         print(xms)
 
     def ButtonClick9(self, event): #8192MB
         global xms
         frame = detail.DetailXmsInfo(self, -1, 'Setting specific minimum RAM allocation')
+        frame.SetMaxSize(wx.Size(500,170))
+        frame.SetMinSize(wx.Size(500,170))
         frame.Show()
         print('Button 9 clicked')
 
     def ButtonEnd(self, event): #Double check exit
         try:
-            dialog = wx.MessageDialog(self, 'Minimal RAM = {}\nMaximum RAM = {}\nYour server bukkit = {}\nAre you sure you want to save this to the program?'.format(xms,xmx,jar), 'Warning', wx.YES_NO)
+            file_xms = open(DataTool.data_path+'\data_xms.txt','r')
+            xms = file_xms.read()
+            file_xms.close()
+            file_xmx = open(DataTool.data_path+'\data_xmx.txt','r')
+            xmx = file_xmx.read()
+            file_xmx.close()
+            file_jar = open(DataTool.data_path+'\data_jar.txt','r')
+            jar = file_jar.read()
+            file_jar.close()
         except:
             dialog = wx.MessageDialog(self, 'At least one value does not exist. Please click after entering all values.', 'Error', wx.OK)
             dialog.ShowModal()
             dialog.Destroy()
         else:
-            if dialog.ShowModal() == wx.ID_YES:
-                print('Save approved')
-                file_xms = open(DataTool.data_path+'\data_xms.txt','w')
-                file_xms.write(xms)
-                file_xms.close()
-                file_xmx = open(DataTool.data_path+'\data_xmx.txt','w')
-                file_xmx.write(xmx)
-                file_xmx.close()
-                file_jar = open(DataTool.data_path+'\data_jar.txt','w') # not necessary save, just double save process.
-                file_jar.write(jar)
-                file_jar.close()            
-                self.Close() #close the RAM allocation page
-            else:
-                print('Save denied')
-            dialog.Destroy()
-
+            self.Close()
 
 
 
@@ -191,53 +192,63 @@ class CheckFrame(wx.Frame):
         global xmx
         print('Button 11 clicked')
         xmx = '-Xmx1024M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick12(self, event): #2048MB
         global xmx
         print('Button 12 clicked')
         xmx = '-Xmx2048M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick13(self, event): #3072MB
         global xmx
         print('Button 13 clicked')
         xmx = '-Xmx3072M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick14(self, event): #4096MB
         global xmx
         print('Button 14 clicked')
         xmx = '-Xmx4096M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick15(self, event): #5120MB
         global xmx
         print('Button 15 clicked')
         xmx = '-Xmx5120M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick16(self, event): #6144MB
         global xmx
         print('Button 16 clicked')
         xmx = '-Xmx6144M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick17(self, event): #7168MB
         global xmx
         print('Button 17 clicked')
         xmx = '-Xmx7168M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick18(self, event): #8192MB
         global xmx
         print('Button 18 clicked')
         xmx = '-Xmx8192M'
+        DataTool.SaveXmx(xmx)
         print(xmx)
 
     def ButtonClick19(self, event): #8192MB
         global xmx
         frame = detail.DetailXmxInfo(self, -1, 'Setting specific maximum RAM allocation')
+        frame.SetMaxSize(wx.Size(500,170))
+        frame.SetMinSize(wx.Size(500,170))
         frame.Show()
         print('Button 19 clicked')
 
@@ -247,6 +258,8 @@ class CheckFrame(wx.Frame):
 def RunCheck():
     app = wx.App()
     frame = CheckFrame(None, -1, 'RAM allocation test') # id = -1 to put initial value
+    frame.SetMaxSize(wx.Size(740,375))
+    frame.SetMinSize(wx.Size(740,375))
     frame.Show()
     app.MainLoop()
 

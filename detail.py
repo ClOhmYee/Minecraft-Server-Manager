@@ -1,6 +1,5 @@
-import wx
-import os
-import DataTool
+import wx, os
+import DataTool # use DataTool.py
 
 
 
@@ -64,7 +63,7 @@ class DetailXmxInfo(wx.Frame):
         print(xmx)
         dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server maximum RAM : {}MB?'.format(xmx_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-            xmx_file = open(DataTool.data_path+'\data_xmx.txt','w')
+            xmx_file = open(DataTool.data_path+'\data_xmx.txt','w+')
             xmx_file.write(xmx)
             xmx_file.close()
             self.Close() # close the detail page
@@ -78,12 +77,16 @@ class DetailXmxInfo(wx.Frame):
 def RunXms():
     app = wx.App()
     frame = DetailXmsInfo(None, -1, 'RAM allocation test (xms)') # xms test
+    frame.SetMaxSize(wx.Size(500,170))
+    frame.SetMinSize(wx.Size(500,170))
     frame.Show()
     app.MainLoop()
 
 def RunXmx():
     app = wx.App()
     frame = DetailXmxInfo(None, -1, 'RAM allocation test (xmx)') # xmx test
+    frame.SetMaxSize(wx.Size(500,170))
+    frame.SetMinSize(wx.Size(500,170))
     frame.Show()
     app.MainLoop()
 

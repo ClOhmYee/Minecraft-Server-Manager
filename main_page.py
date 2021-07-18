@@ -29,8 +29,8 @@ class MainFrame(wx.Frame):
         menu_bar = wx.MenuBar()
         menu = wx.Menu()
         menu_bar.Append(menu, 'Menu')
-        menu.Append(101,'Adjust RAM allocation')
-        self.Bind(wx.EVT_MENU, self.RAM_allocation, id=101)
+        menu.Append(101,'Settings')
+        self.Bind(wx.EVT_MENU, self.Settings, id=101)
         menu.Append(102, 'Quit')
         self.Bind(wx.EVT_MENU, self.Quit, id=102)
         self.SetMenuBar(menu_bar)
@@ -52,9 +52,11 @@ class MainFrame(wx.Frame):
         start_server.RunServer()
 
 
-    def RAM_allocation(self,event):
-        print('RAM allocation activated.')
-        frame = check.CheckFrame(self, -1, 'Server RAM allocation')
+    def Settings(self,event):
+        print('Settings activated.')
+        frame = check.CheckFrame(self, -1, 'Server Settings')
+        frame.SetMaxSize(wx.Size(740,375))
+        frame.SetMinSize(wx.Size(740,375))
         frame.Show()
 
     def Quit(self, event):
@@ -70,15 +72,10 @@ class MainFrame(wx.Frame):
 def RunMain():
     app = wx.App()
     frame = MainFrame(None, -1, 'Minecraft Server Manager') # id = -1 to put initial value
+    frame.SetMaxSize(wx.Size(800,600))
+    frame.SetMinSize(wx.Size(800,600))
     frame.Show()
     app.MainLoop()
 
+
 RunMain()
-
-
-
-# number = input('Enter : ')
-
-# if number == '1':
-#     boot_path = os.getcwd() + '\start_server.py'
-#     exec(open(boot_path).read())
