@@ -8,7 +8,6 @@ import DataTool # use DataTool.py
 class DetailXmsInfo(wx.Frame):
     def __init__(self, parent, id, title):
         wx.Frame.__init__(self, parent, id, title, size=(500,170))
-
         self.panel = wx.Panel(self)
         self.xms = wx.StaticText(self.panel, label = "Please enter the minimum RAM allocation you want (unit : MB) :")
         self.xms.SetPosition((10,50))
@@ -42,6 +41,7 @@ class DetailXmsInfo(wx.Frame):
 # -----------------------------------xmx-----------------------------------
 class DetailXmxInfo(wx.Frame):
     def __init__(self, parent, id, title):
+        global xmx
         wx.Frame.__init__(self, parent, id, title, size=(500,170))
 
         self.panel = wx.Panel(self)
@@ -63,7 +63,7 @@ class DetailXmxInfo(wx.Frame):
         print(xmx)
         dialog = wx.MessageDialog(self, 'Are you sure want to allocate your server maximum RAM : {}MB?'.format(xmx_value), 'Warning', wx.CANCEL)
         if dialog.ShowModal() == wx.ID_OK:
-            xmx_file = open(DataTool.data_path+'\data_xmx.txt','w+')
+            xmx_file = open(DataTool.data_path+'\data_xmx.txt','w')
             xmx_file.write(xmx)
             xmx_file.close()
             self.Close() # close the detail page

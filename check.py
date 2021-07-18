@@ -94,9 +94,7 @@ class CheckFrame(wx.Frame):
             dialog = wx.MessageDialog(self, 'Are you sure your bukkit name is {}.jar? (DONT PUT .JAR WHEN TYPING!)'.format(self.g_jar.GetValue()), 'Warning', wx.YES_NO)
             if dialog.ShowModal() == wx.ID_YES:
                 jar = self.g_jar.GetValue()+'.jar'
-                file_jar = open(DataTool.data_path+'\data_jar.txt','w')
-                file_jar.write(jar)
-                file_jar.close()
+                DataTool.SaveJar(jar)
                 print(jar)
             else:
                 pass
