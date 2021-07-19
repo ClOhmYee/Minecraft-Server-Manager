@@ -1,5 +1,5 @@
 import wx, os
-import check, DataTool, start_server, activate_eula  # use detail.py, DataTool.py, start_server.py
+import check, DataTool, start_server, activate_eula  # use detail.py, DataTool.py, start_server.py, activate_eula.py
 
 global xms, xmx, jar
 try: # import xms data
