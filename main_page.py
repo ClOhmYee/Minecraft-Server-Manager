@@ -1,5 +1,5 @@
 import wx, os
-import check, DataTool, start_server  # use detail.py, DataTool.py, start_server.py
+import check, DataTool, start_server, activate_eula  # use detail.py, DataTool.py, start_server.py
 
 global xms, xmx, jar
 try: # import xms data
@@ -36,17 +36,14 @@ class MainFrame(wx.Frame):
         self.SetMenuBar(menu_bar)
 
         self.pnl = wx.Panel(self)
-        self.test1 = wx.Button(self.pnl, id=1111, label = 'status', pos =(650,400), size =(100,70))
-        self.Bind(wx.EVT_BUTTON, self.Test1, id=1111)
         self.button1 = wx.Button(self.pnl, id=111, label = 'Run the server', pos =(650,350), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonStart, id=111)
+        self.button2 = wx.Button(self.pnl, id=1, label = 'Agree EULA', pos =(10,10), size =(100,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonEULA, id=1)
 
         self.Centre()
         
 
-    def Test1(self, event):
-        self.show_status = wx.StaticText(self, label = 'xms = {}, xmx = {}, jar = {}'.format(xms,xmx,jar))
-        self.show_status.SetPosition((450,470))
 
     def ButtonStart(self, event):
         start_server.RunServer()
@@ -66,9 +63,15 @@ class MainFrame(wx.Frame):
         else:
             pass
         dialog.Destroy()
+    
+    def ButtonEULA(self, event):
+        activate_eula.ActivateEula()
+        dialog = wx.MessageDialog(None, 'You have agreed to EULA.', 'Message', wx.OK)
+        dialog.ShowModal()
+        dialog.Destroy()
 
 
-
+ 
 def RunMain():
     app = wx.App()
     frame = MainFrame(None, -1, 'Minecraft Server Manager') # id = -1 to put initial value
