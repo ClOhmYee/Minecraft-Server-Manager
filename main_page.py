@@ -2,6 +2,9 @@ import wx, os
 import check, DataTool, start_server, activate_eula  # use detail.py, DataTool.py, start_server.py, activate_eula.py
 
 global xms, xmx, jar
+
+os.chdir(DataTool.base_path)
+
 try: # import xms data
     file_xms = open(DataTool.data_path+'\data_xms.txt','r')
     xms = file_xms.read()
@@ -36,10 +39,14 @@ class MainFrame(wx.Frame):
         self.SetMenuBar(menu_bar)
 
         self.pnl = wx.Panel(self)
-        self.button1 = wx.Button(self.pnl, id=111, label = 'Run the server', pos =(650,350), size =(100,50))
+        self.start = wx.Button(self.pnl, id=111, label = 'Run the server', pos =(650,350), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonStart, id=111)
-        self.button2 = wx.Button(self.pnl, id=1, label = 'Agree EULA', pos =(10,10), size =(100,50))
+        self.eula = wx.Button(self.pnl, id=1, label = 'Agree EULA', pos =(10,10), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonEULA, id=1)
+        self.server_properties = wx.Button(self.pnl, id=2, label = 'Open Server.properties', pos =(120,10), size =(130,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonProperties, id=2)
+        self.ops = wx.Button(self.pnl, id=3, label = 'Open Op list', pos =(260,10), size =(100,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonOp, id=3)
 
         self.Centre()
         
@@ -69,6 +76,12 @@ class MainFrame(wx.Frame):
         dialog = wx.MessageDialog(None, 'You have agreed to EULA.', 'Message', wx.OK)
         dialog.ShowModal()
         dialog.Destroy()
+
+    def ButtonProperties(self, event):
+        os.system('start notepad.exe server.properties')
+    
+    def ButtonOp(self, event):
+        os.system('start notepad.exe ops.json')
 
 
  
