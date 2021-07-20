@@ -47,6 +47,12 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.ButtonProperties, id=2)
         self.ops = wx.Button(self.pnl, id=3, label = 'Open Op list', pos =(260,10), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonOp, id=3)
+        self.ban = wx.Button(self.pnl, id=4, label = 'Open Ban-player list', pos =(370,10), size =(130,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonBan, id=4)
+        self.banip = wx.Button(self.pnl, id=5, label = 'Open Ban-ip list', pos =(510,10), size =(110,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonBanIP, id=5)
+        self.whitelist = wx.Button(self.pnl, id=6, label = 'Open Whitelist', pos =(630,10), size =(100,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonWhiteList, id=6)
 
         self.Centre()
         
@@ -82,6 +88,15 @@ class MainFrame(wx.Frame):
     
     def ButtonOp(self, event):
         os.system('start notepad.exe ops.json')
+
+    def ButtonBan(self,event):
+        os.system('start notepad.exe banned-players.json')
+    
+    def ButtonBanIP(self,event):
+        os.system('start notepad.exe banned-ips.json')
+    
+    def ButtonWhiteList(self,event):
+        os.system('start notepad.exe whitelist.json')
 
 
  
