@@ -1,12 +1,13 @@
-import os
-import wx
+import os, wx
+import DataTool
 
 
 
 
 class InstallFrame(wx.Frame):
     def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title, size=(500,150))
+        os.chdir(DataTool.base_path)
+        wx.Frame.__init__(self, parent, id, title, size=(500,190))
         self.version = wx.StaticText(self, label = 'Enter the version of the server you want to start : ')
         self.version.SetPosition((10,15))
         self.g_version = wx.TextCtrl(self, style=wx.TE_PROCESS_ENTER)
@@ -17,6 +18,8 @@ class InstallFrame(wx.Frame):
         self.g_version.Bind(wx.EVT_TEXT_ENTER, self.ButtonClick)
         self.warning = wx.StaticText(self, label = 'Once you have completed entering the version, you will download server tools. \nPlease DO NOT MANIPULATE the program until you receive a notification message.')
         self.warning.SetPosition((10,70))
+        self.warning2 = wx.StaticText(self, label = 'This is a one-time operation. \nIf you have already downloaded it, you do not need to reinstall it.')
+        self.warning2.SetPosition((10,110))
 
         self.Centre()
 
@@ -37,9 +40,9 @@ class InstallFrame(wx.Frame):
 def RunInstall():
     app = wx.App()
     frame = InstallFrame(None, -1, 'Installation')
-    frame.SetMaxSize(wx.Size(500,150))
-    frame.SetMinSize(wx.Size(500,150))
+    frame.SetMaxSize(wx.Size(500,190))
+    frame.SetMinSize(wx.Size(500,190))
     frame.Show()
     app.MainLoop()
 
-# RunInstall()
+RunInstall()
