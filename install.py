@@ -45,4 +45,4 @@ def RunInstall():
     frame.Show()
     app.MainLoop()
 
-RunInstall()
+# RunInstall()

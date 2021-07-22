@@ -5,7 +5,6 @@ import DataTool
 
 
 os.chdir(DataTool.base_path)
-print(DataTool.base_path)
 
 
 
