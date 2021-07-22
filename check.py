@@ -1,6 +1,9 @@
 import wx, os
 import detail, DataTool # use detail.py, DataTool.py
 
+
+
+
 try: # import xms data
     file_xms = open(DataTool.data_path+'\data_xms.txt','r')
     xms = file_xms.read()
@@ -26,6 +29,8 @@ except:
 class CheckFrame(wx.Frame):
     def __init__(self, parent, id, title):
 # -----------------------------------xms-----------------------------------
+        if not os.path.exists(DataTool.data_path):
+            os.makedirs(DataTool.data_path)
         wx.Frame.__init__(self, parent, id, title, size=(740,375))
         self.xms = wx.StaticText(self, label = 'Minimum RAM allocation (xms) (1024MB = 1GB)')
         self.xms.SetPosition((5,10))

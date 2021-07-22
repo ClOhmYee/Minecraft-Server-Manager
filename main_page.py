@@ -1,5 +1,5 @@
 import wx, os
-import check, DataTool, start_server, activate_eula  # use detail.py, DataTool.py, start_server.py, activate_eula.py
+import check, DataTool, start_server, activate_eula, install  # use detail.py, DataTool.py, start_server.py, activate_eula.py, install.py
 
 global xms, xmx, jar
 
@@ -39,7 +39,7 @@ class MainFrame(wx.Frame):
         self.SetMenuBar(menu_bar)
 
         self.pnl = wx.Panel(self)
-        self.before = wx.StaticText(self.pnl, label = 'Set before server starts')
+        self.before = wx.StaticText(self.pnl, label = 'Use only when opening the server for the first time before starting it')
         self.before.SetPosition((5,10))
         self.after = wx.StaticText(self.pnl, label = 'Set after startup')
         self.after.SetPosition((5,100))
@@ -47,8 +47,10 @@ class MainFrame(wx.Frame):
         button_height_after = 120
         self.start = wx.Button(self.pnl, id=111, label = 'Run the server', pos =(650,350), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonStart, id=111)
-        self.eula = wx.Button(self.pnl, id=1, label = 'Agree EULA', pos =(0,button_height_before), size =(100,50))
-        self.Bind(wx.EVT_BUTTON, self.ButtonEULA, id=1)
+        self.setup = wx.Button(self.pnl, id=11, label = 'Download bukkit/tools', pos =(0,button_height_before), size =(150,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonSetup, id=11)
+        self.eula = wx.Button(self.pnl, id=12, label = 'Agree EULA', pos =(160,button_height_before), size =(100,50))
+        self.Bind(wx.EVT_BUTTON, self.ButtonEULA, id=12)
         self.server_properties = wx.Button(self.pnl, id=2, label = 'Open Server.properties', pos =(0,button_height_after), size =(130,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonProperties, id=2)
         self.ops = wx.Button(self.pnl, id=3, label = 'Open Op list', pos =(140,button_height_after), size =(100,50))
@@ -82,7 +84,10 @@ class MainFrame(wx.Frame):
         else:
             pass
         dialog.Destroy()
-    
+
+    def ButtonSetup(self, event):
+        install.RunInstall()
+
     def ButtonEULA(self, event):
         activate_eula.ActivateEula()
         dialog = wx.MessageDialog(None, 'You have agreed to EULA.', 'Message', wx.OK)

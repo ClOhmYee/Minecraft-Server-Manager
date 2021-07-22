@@ -5,9 +5,7 @@ import os
 base_path = os.path.dirname(__file__)
 data_path = os.path.dirname(__file__)+'\data'
 
-global xms
-global xmx
-global jar
+global xms, xmx, jar
 
 def SaveXms(xms):
     file_xms = open(data_path+'\data_xms.txt','w')

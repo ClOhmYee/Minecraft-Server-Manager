@@ -1,8 +1,14 @@
 import os, wx
 import DataTool
 
-app = wx.App()
+
+
+
 os.chdir(DataTool.base_path)
+print(DataTool.base_path)
+
+
+
 
 def RunServer():
     try: # import all data to boot server
@@ -20,10 +26,11 @@ def RunServer():
         dialog.ShowModal()
         dialog.Destroy()
     else:
-        cmd = 'java {} {} -jar {}'.format(xms, xmx, jar)
+        cmd = 'java {} {} -jar {} nogui'.format(xms, xmx, jar)
         print('Starting the server . . .')
         print(cmd)
         os.system(cmd)
 
 
+app = wx.App()
 # RunServer()
