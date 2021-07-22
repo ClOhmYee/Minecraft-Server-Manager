@@ -2,8 +2,8 @@ import os
 
 #path using os.getcwd() does not work in .py files, but work pretty well when it is made of .exe file.
 #if you are not ready to execute the file in .exe extension, just make sure you MUST use 'os.path.dirname(__file__)'.
-base_path = os.path.dirname(__file__)
-data_path = os.path.dirname(__file__)+'\data'
+base_path = os.getcwd()
+data_path = os.getcwd()+'\data'
 
 global xms, xmx, jar
 
