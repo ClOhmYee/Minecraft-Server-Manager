@@ -37,9 +37,9 @@ class InstallFrame(wx.Frame):
 def RunInstall():
     app = wx.App()
     frame = InstallFrame(None, -1, 'Installation')
-    frame.SetMaxSize(wx.Size(450,150))
-    frame.SetMinSize(wx.Size(450,150))
+    frame.SetMaxSize(wx.Size(500,150))
+    frame.SetMinSize(wx.Size(500,150))
     frame.Show()
     app.MainLoop()
 
-RunInstall()
+# RunInstall()
