@@ -29,6 +29,10 @@ class InstallFrame(wx.Frame):
             version_value = self.g_version.GetValue()
             os.system('curl -z BuildTools.jar -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar')
             os.system('java -jar BuildTools.jar --rev {}'.format(version_value))
+            if not os.path.exists(DataTool.data_path):
+                os.makedirs(DataTool.data_path)
+            file_jar = open('data\data_jar.txt','w')
+            file_jar.write('spigot-{}.jar'.format(version_value))
             dialog = wx.MessageDialog(self, 'Download complete.', 'Notification', wx.OK)
             dialog.ShowModal()
             self.Close() # close page
