@@ -20,6 +20,7 @@ class InstallFrame(wx.Frame):
         self.warning.SetPosition((10,70))
         self.warning2 = wx.StaticText(self, label = 'This is a one-time operation. \nIf you have already downloaded it, you do not need to reinstall it.')
         self.warning2.SetPosition((10,110))
+        self.warning2.SetFont(DataTool.notice_font)
 
         self.Centre()
 
