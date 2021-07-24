@@ -32,35 +32,39 @@ class MainFrame(wx.Frame):
         menu_bar = wx.MenuBar()
         menu = wx.Menu()
         menu_bar.Append(menu, 'Menu')
-        menu.Append(101,'Settings')
+        menu.Append(101, 'Settings')
         self.Bind(wx.EVT_MENU, self.Settings, id=101)
         menu.Append(102, 'Quit')
         self.Bind(wx.EVT_MENU, self.Quit, id=102)
+        menu2 = wx.Menu()
+        menu_bar.Append(menu2, 'Open')
+        menu2.Append(103, 'Server Properties')
+        self.Bind(wx.EVT_MENU, self.OpenProperties, id=103)
+        menu2.Append(104, 'Op List')
+        self.Bind(wx.EVT_MENU, self.OpenOp, id=104)
+        menu2.Append(105, 'Ban-player List')
+        self.Bind(wx.EVT_MENU, self.OpenBan, id=105)
+        menu2.Append(106, 'Ban-ip List')
+        self.Bind(wx.EVT_MENU, self.OpenBanIP, id=106)
+        menu2.Append(107, 'Whitelist')
+        self.Bind(wx.EVT_MENU, self.OpenWhiteList, id=107)
         self.SetMenuBar(menu_bar)
 
         self.pnl = wx.Panel(self)
+        self.SetBackgroundColour(wx.LIGHT_GREY)
         self.before = wx.StaticText(self.pnl, label = 'Use only when opening the server for the first time before starting it')
         self.before.SetPosition((5,10))
-        self.after = wx.StaticText(self.pnl, label = 'Set after startup')
-        self.after.SetPosition((5,100))
+        # self.after = wx.StaticText(self.pnl, label = 'Set after startup')
+        # self.after.SetPosition((5,100))
         button_height_before = 30
         button_height_after = 120
         self.start = wx.Button(self.pnl, id=111, label = 'Run the server', pos =(650,350), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonStart, id=111)
+        self.start.SetBackgroundColour(wx.Colour(255,255,117))
         self.setup = wx.Button(self.pnl, id=11, label = 'Download bukkit/tools', pos =(0,button_height_before), size =(150,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonSetup, id=11)
         self.eula = wx.Button(self.pnl, id=12, label = 'Agree EULA', pos =(160,button_height_before), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonEULA, id=12)
-        self.server_properties = wx.Button(self.pnl, id=2, label = 'Open Server.properties', pos =(0,button_height_after), size =(130,50))
-        self.Bind(wx.EVT_BUTTON, self.ButtonProperties, id=2)
-        self.ops = wx.Button(self.pnl, id=3, label = 'Open Op list', pos =(140,button_height_after), size =(100,50))
-        self.Bind(wx.EVT_BUTTON, self.ButtonOp, id=3)
-        self.ban = wx.Button(self.pnl, id=4, label = 'Open Ban-player list', pos =(250,button_height_after), size =(130,50))
-        self.Bind(wx.EVT_BUTTON, self.ButtonBan, id=4)
-        self.banip = wx.Button(self.pnl, id=5, label = 'Open Ban-ip list', pos =(390,button_height_after), size =(110,50))
-        self.Bind(wx.EVT_BUTTON, self.ButtonBanIP, id=5)
-        self.whitelist = wx.Button(self.pnl, id=6, label = 'Open Whitelist', pos =(510,button_height_after), size =(100,50))
-        self.Bind(wx.EVT_BUTTON, self.ButtonWhiteList, id=6)
 
         self.Centre()
         
@@ -94,19 +98,19 @@ class MainFrame(wx.Frame):
         dialog.ShowModal()
         dialog.Destroy()
 
-    def ButtonProperties(self, event):
+    def OpenProperties(self, event):
         os.system('start notepad.exe server.properties')
     
-    def ButtonOp(self, event):
+    def OpenOp(self, event):
         os.system('start notepad.exe ops.json')
 
-    def ButtonBan(self,event):
+    def OpenBan(self,event):
         os.system('start notepad.exe banned-players.json')
     
-    def ButtonBanIP(self,event):
+    def OpenBanIP(self,event):
         os.system('start notepad.exe banned-ips.json')
     
-    def ButtonWhiteList(self,event):
+    def OpenWhiteList(self,event):
         os.system('start notepad.exe whitelist.json')
 
 
