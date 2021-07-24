@@ -89,6 +89,10 @@ class CheckFrame(wx.Frame):
         self.button_jar.Bind(wx.EVT_BUTTON, self.JarClick)
         self.g_jar.Bind(wx.EVT_TEXT_ENTER, self.JarClick)
 
+        self.notice = wx.StaticText(self, label = 'If you downloaded bukkit with this program, the program would have automatically designated the bukkit.')
+        self.notice.SetPosition((5,180))
+        self.notice.SetFont(DataTool.notice_font)
+
     def JarClick(self, event):
         global jar
         if self.g_jar.GetValue() == '':

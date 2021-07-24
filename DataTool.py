@@ -1,9 +1,14 @@
-import os
+import os, wx
+
+
+
+app = wx.App()
 
 #path using os.getcwd() does not work in .py files, but work pretty well when it is made of .exe file.
 #if you are not ready to execute the file in .exe extension, just make sure you MUST use 'os.path.dirname(__file__)'.
 base_path = os.getcwd()
 data_path = os.getcwd()+'\data'
+notice_font = wx.Font(wx.FontInfo(10).Bold())
 
 global xms, xmx, jar
 
