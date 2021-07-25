@@ -36,6 +36,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.Settings, id=101)
         menu.Append(102, 'Quit')
         self.Bind(wx.EVT_MENU, self.Quit, id=102)
+        
         menu2 = wx.Menu()
         menu_bar.Append(menu2, 'Open')
         menu2.Append(103, 'Server Properties')
@@ -48,6 +49,18 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OpenBanIP, id=106)
         menu2.Append(107, 'Whitelist')
         self.Bind(wx.EVT_MENU, self.OpenWhiteList, id=107)
+        menu2.Append(108, 'Bukkit Configuration')
+        self.Bind(wx.EVT_MENU, self.OpenBukkit, id=108)
+        menu2.Append(109, 'Command Configuration')
+        self.Bind(wx.EVT_MENU, self.OpenCommand, id=109)
+        menu2.Append(110, 'Spigot Configuration')
+        self.Bind(wx.EVT_MENU, self.OpenSpigot, id=110)
+        menu2.Append(111, 'Help')
+        self.Bind(wx.EVT_MENU, self.OpenHelp, id=111)
+
+        menu3 = wx.Menu()
+        menu_bar.Append(menu3, 'World')
+
         self.SetMenuBar(menu_bar)
 
         self.pnl = wx.Panel(self)
@@ -57,10 +70,10 @@ class MainFrame(wx.Frame):
         # self.after = wx.StaticText(self.pnl, label = 'Set after startup')
         # self.after.SetPosition((5,100))
         button_height_before = 30
-        button_height_after = 120
+        # button_height_after = 120
         self.start = wx.Button(self.pnl, id=111, label = 'Run the server', pos =(650,350), size =(100,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonStart, id=111)
-        self.start.SetBackgroundColour(wx.Colour(255,255,117))
+        self.start.SetBackgroundColour(wx.Colour(255,255,200))
         self.setup = wx.Button(self.pnl, id=11, label = 'Download bukkit/tools', pos =(0,button_height_before), size =(150,50))
         self.Bind(wx.EVT_BUTTON, self.ButtonSetup, id=11)
         self.eula = wx.Button(self.pnl, id=12, label = 'Agree EULA', pos =(160,button_height_before), size =(100,50))
@@ -113,8 +126,19 @@ class MainFrame(wx.Frame):
     def OpenWhiteList(self,event):
         os.system('start notepad.exe whitelist.json')
 
+    def OpenBukkit(self,event):
+        os.system('start notepad.exe bukkit.yml')
 
+    def OpenCommand(self, event):
+        os.system('start notepad.exe commands.yml')
+
+    def OpenSpigot(self, event):
+        os.system('start notepad.exe spigot.yml')
+
+    def OpenHelp(self, event):
+        os.system('start notepad.exe help.yml')
  
+
 def RunMain():
     app = wx.App()
     frame = MainFrame(None, -1, 'Minecraft Server Manager') # id = -1 to put initial value
