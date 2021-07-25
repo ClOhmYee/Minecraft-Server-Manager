@@ -1,4 +1,4 @@
-import wx, os
+import wx, os, shutil
 import check, DataTool, start_server, activate_eula, install  # use detail.py, DataTool.py, start_server.py, activate_eula.py, install.py
 
 global xms, xmx, jar
@@ -60,6 +60,12 @@ class MainFrame(wx.Frame):
 
         menu3 = wx.Menu()
         menu_bar.Append(menu3, 'World')
+        menu3.Append(112, 'Delete Overworld')
+        self.Bind(wx.EVT_MENU, self.DeleteOverworld, id=112)
+        menu3.Append(113, 'Delete Nether')
+        self.Bind(wx.EVT_MENU, self.DeleteNether, id=113)
+        menu3.Append(114, 'Delete The End')
+        self.Bind(wx.EVT_MENU, self.DeleteTheEnd, id=114)
 
         self.SetMenuBar(menu_bar)
 
@@ -137,6 +143,38 @@ class MainFrame(wx.Frame):
 
     def OpenHelp(self, event):
         os.system('start notepad.exe help.yml')
+    
+
+    def DeleteOverworld(self, event):
+        try:
+            shutil.rmtree(r'world')
+        except:
+            dialog = wx.MessageDialog(self, 'Overworld map folder does not exist in the current directory.', 'Error', wx.OK)
+        else:
+            dialog = wx.MessageDialog(self, 'Overworld map files in the current directory have been deleted successfully.', 'Notice', wx.OK)
+        dialog.ShowModal()
+        dialog.Destroy()
+
+
+    def DeleteNether(self, event):
+        try:
+            shutil.rmtree(r'world_nether')
+        except:
+            dialog = wx.MessageDialog(self, 'Nether map folder does not exist in the current directory.', 'Error', wx.OK)
+        else:
+            dialog = wx.MessageDialog(self, 'Nether map files in the current directory have been deleted successfully.', 'Notice', wx.OK)
+        dialog.ShowModal()
+        dialog.Destroy()
+
+    def DeleteTheEnd(self, event):
+        try:
+            shutil.rmtree(r'world_the_end')
+        except:
+            dialog = wx.MessageDialog(self, 'The End map folder does not exist in the current directory.', 'Error', wx.OK)
+        else:
+            dialog = wx.MessageDialog(self, 'The End map files in the current directory have been deleted successfully.', 'Notice', wx.OK)
+        dialog.ShowModal()
+        dialog.Destroy()
  
 
 def RunMain():
