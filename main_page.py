@@ -1,4 +1,6 @@
 import wx, os, shutil
+
+from wx.core import EVT_MENU
 import check, DataTool, start_server, activate_eula, install  # use detail.py, DataTool.py, start_server.py, activate_eula.py, install.py
 
 global xms, xmx, jar
@@ -55,8 +57,10 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OpenCommand, id=109)
         menu2.Append(110, 'Spigot Configuration')
         self.Bind(wx.EVT_MENU, self.OpenSpigot, id=110)
-        menu2.Append(111, 'Help')
-        self.Bind(wx.EVT_MENU, self.OpenHelp, id=111)
+        menu2.Append(111, 'Server Folder')
+        self.Bind(wx.EVT_MENU, self.OpenFolder, id=111)
+        menu2.Append(112, 'Help')
+        self.Bind(wx.EVT_MENU, self.OpenHelp, id=112)
 
         menu3 = wx.Menu()
         menu_bar.Append(menu3, 'World')
@@ -140,6 +144,9 @@ class MainFrame(wx.Frame):
 
     def OpenSpigot(self, event):
         os.system('start notepad.exe spigot.yml')
+
+    def OpenFolder(self, event):
+        os.system('start explorer.exe {}'.format(DataTool.base_path))
 
     def OpenHelp(self, event):
         os.system('start notepad.exe help.yml')
