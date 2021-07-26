@@ -25,7 +25,7 @@ def RunServer():
         dialog.ShowModal()
         dialog.Destroy()
     else:
-        cmd = 'java {} {} -jar {} nogui'.format(xms, xmx, jar)
+        cmd = 'java -DIReallyKnowWhatIAmDoingISwear {} {} -jar {} nogui'.format(xms, xmx, jar)
         print('Starting the server . . .')
         print(cmd)
         os.system(cmd)

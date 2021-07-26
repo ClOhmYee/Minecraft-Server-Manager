@@ -30,8 +30,11 @@ except:
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title, size=(800,600))
+        wx.Frame.__init__(self, parent, id, title, size=(800,500))
         menu_bar = wx.MenuBar()
+        ico = wx.Icon('CroMi_.ico', wx.BITMAP_TYPE_ICO)
+        self.SetIcon(ico)
+
         menu = wx.Menu()
         menu_bar.Append(menu, 'Menu')
         menu.Append(101, 'Settings')
@@ -186,9 +189,9 @@ class MainFrame(wx.Frame):
 
 def RunMain():
     app = wx.App()
-    frame = MainFrame(None, -1, 'Minecraft Server Manager') # id = -1 to put initial value
-    frame.SetMaxSize(wx.Size(800,600))
-    frame.SetMinSize(wx.Size(800,600))
+    frame = MainFrame(None, -1, 'Minecraft Server Manager by CroMi') # id = -1 to put initial value
+    frame.SetMaxSize(wx.Size(800,500))
+    frame.SetMinSize(wx.Size(800,500))
     frame.Show()
     app.MainLoop()
 
