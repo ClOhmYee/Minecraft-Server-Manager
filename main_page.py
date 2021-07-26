@@ -64,12 +64,12 @@ class MainFrame(wx.Frame):
 
         menu3 = wx.Menu()
         menu_bar.Append(menu3, 'World')
-        menu3.Append(112, 'Delete Overworld')
-        self.Bind(wx.EVT_MENU, self.DeleteOverworld, id=112)
-        menu3.Append(113, 'Delete Nether')
-        self.Bind(wx.EVT_MENU, self.DeleteNether, id=113)
-        menu3.Append(114, 'Delete The End')
-        self.Bind(wx.EVT_MENU, self.DeleteTheEnd, id=114)
+        menu3.Append(113, 'Delete Overworld')
+        self.Bind(wx.EVT_MENU, self.DeleteOverworld, id=113)
+        menu3.Append(114, 'Delete Nether')
+        self.Bind(wx.EVT_MENU, self.DeleteNether, id=114)
+        menu3.Append(115, 'Delete The End')
+        self.Bind(wx.EVT_MENU, self.DeleteTheEnd, id=115)
 
         self.SetMenuBar(menu_bar)
 
