@@ -1,7 +1,6 @@
 import wx, os, shutil
-
-from wx.core import EVT_MENU
 import check, DataTool, start_server, activate_eula, install  # use detail.py, DataTool.py, start_server.py, activate_eula.py, install.py
+
 
 global xms, xmx, jar
 
@@ -32,7 +31,7 @@ class MainFrame(wx.Frame):
     def __init__(self, parent, id, title):
         wx.Frame.__init__(self, parent, id, title, size=(800,500))
         menu_bar = wx.MenuBar()
-        ico = wx.Icon('CroMi_.ico', wx.BITMAP_TYPE_ICO)
+        # ico = wx.Icon('\data\main_icon.ico', wx.BITMAP_TYPE_ICO)
         self.SetIcon(ico)
 
         menu = wx.Menu()
@@ -77,7 +76,7 @@ class MainFrame(wx.Frame):
         self.SetMenuBar(menu_bar)
 
         self.pnl = wx.Panel(self)
-        self.SetBackgroundColour(wx.LIGHT_GREY)
+        # self.SetBackgroundColour(wx.LIGHT_GREY)
         self.before = wx.StaticText(self.pnl, label = 'Use only when opening the server for the first time before starting it')
         self.before.SetPosition((5,10))
         # self.after = wx.StaticText(self.pnl, label = 'Set after startup')
@@ -189,7 +188,7 @@ class MainFrame(wx.Frame):
 
 def RunMain():
     app = wx.App()
-    frame = MainFrame(None, -1, 'Minecraft Server Manager by CroMi') # id = -1 to put initial value
+    frame = MainFrame(None, -1, 'Minecraft Server Manager by ClOhmYee') # id = -1 to put initial value
     frame.SetMaxSize(wx.Size(800,500))
     frame.SetMinSize(wx.Size(800,500))
     frame.Show()
